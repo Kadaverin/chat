@@ -10,8 +10,8 @@
  - `DELETE "api/users/id"` - delete user by id  
 #### Messages:
  - `GET "api/messages"`- returns all messages list
- - `GET "api/users/id"`- returns message by id 
- - `POST "api/users"` - create new message
- - `PUT "api/users/id"` - update message
- - `DELETE "api/users/id"` - delete message 
+ - `GET "api/messages/id"`- returns message by id 
+ - `POST "api/messages"` - create new message
+ - `PUT "api/messages/id"` - update message
+ - `DELETE "api/messages/id"` - delete message 
  
