@@ -6,6 +6,10 @@ class UserRepository extends Repository {
     super();
     this.model = User;
   }
+
+  getUsersByIdsArray(idsArr , callback){
+    this.model.find( { "_id": { $in : idsArr } }).exec(callback)
+  }
 }
 
 module.exports = new UserRepository();

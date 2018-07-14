@@ -35,22 +35,15 @@ module.exports = {
 
   // найти всех собеседников
 
-  findAllInterlocutor: (targetUserId , callback) => {
-    let userIdsArr = [];
-    const query = { $or: [ {'senderId': targetUserId} , {'receiverId' : targetUserId} ]};
-    const options = {'_id': 0, 'text': 0, '__v': 0};
-
-    MessageRepository.findAllByQuery(query, options , (err , filteredMessages) =>{
-      filteredMessages.forEach( (receiverAndSenderIdsObj) => {
-        for (let key in receiverAndSenderIdsObj.toObject()){
-          let userId = receiverAndSenderIdsObj[key];
-          if (userId != targetUserId ) { userIdsArr.push(userId); }
+   findAllInterlocutor: (targetUserId , callback) => {
+      MessageRepository.findInterlocutorsIdsByUserId( targetUserId , (err, result) => {
+        if (err) {
+          callback(err , null);
+          return;
         }
-      })
-      UserRepository.findAllByQuery({"_id": { $in : userIdsArr }} , (err , users) => {
-        callback(err, users);
+        UserRepository.getUsersByIdsArray(result[0]['usersIds'] , (err , users) => {
+          callback(err, users);
+        });
       });
-    })
-
-  },
+   }  
 };

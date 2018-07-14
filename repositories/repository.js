@@ -11,10 +11,6 @@ class Repository{
     query.exec(callback);   
   }
 
-  findAllByQuery(query, opt, callback){
-    this.model.find(query, opt).exec(callback)
-  }
-
   updateById(id , params, callback){
     this.model.findByIdAndUpdate(id, params).exec(callback)
   }
